@@ -1,29 +1,59 @@
-import * as React from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useRouter } from 'next/router'
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { selectUser, setUser } from '@/features/user/userSlice'
+import { useDispatch, useSelector } from 'react-redux';
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const inputRef = useRef();
+  const [loginError, setLoginError] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const user = useSelector(selectUser);
+
+  useEffect(() => {
+    if (user?.id) {
+      router.replace("/");
+    }
+    inputRef.current.focus()
+  }, [])
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+
+    // call login api
+    fetch("/api/auth", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        username: data.get('username'),
+        password: data.get('password'),
+      })
+    }).then(res => res.json())
+      .then(({ user, error }) => {
+        if (user) {
+          // set user to store
+          dispatch(setUser(user));
+          router.push('/');
+        } else {
+          setLoginError(error)
+        }
+      });
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -48,11 +78,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
+              id="username"
+              label="Username"
+              name="username"
+              inputRef={inputRef}
             />
             <TextField
               margin="normal"
@@ -64,6 +93,7 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
+            {loginError && <div className='error'>{loginError}</div>}
             <Button
               type="submit"
               fullWidth
@@ -75,6 +105,11 @@ export default function SignIn() {
           </Box>
         </Box>
       </Container>
+      <style jsx>{`
+        .error {
+          color: #ff0000;
+        }
+      `}</style>
     </ThemeProvider>
   );
 }

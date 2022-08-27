@@ -16,10 +16,13 @@
     "@emotion/styled": "latest",
     "@mui/icons-material": "latest",
     "@mui/material": "latest",
+    "@reduxjs/toolkit": "1.8.5",
     "next": "latest",
     "prop-types": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-redux": "8.0.2",
+    "swr": "^1.3.0"
   },
   "devDependencies": {
     "eslint": "latest",
