@@ -26,7 +26,7 @@ const pages = [
   },
   {
     title: 'New',
-    pathname: 'newPoll',
+    pathname: 'add',
   }
 ];
 
@@ -126,6 +126,9 @@ const ResponsiveAppBar = ({ activeIndex, user }) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <Box component="span" sx={{ fontWeight: 600, mr: 2, display: { xs: 'none', md: 'inline-block' } }}>
+              {user?.name}
+            </Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt={user?.name || 'user image'} src={user?.avatarURL} />

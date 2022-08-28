@@ -12,9 +12,7 @@ export default function Index() {
   const router = useRouter();
   const user = useSelector(selectUser);
 
-  debugger
   useEffect(() => {
-    debugger
     if (!user?.id) {
       router.replace("/login");
     }

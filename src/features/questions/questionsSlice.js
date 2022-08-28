@@ -4,10 +4,10 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   "8xf0y6ziyjabvozdd253nd": {
     id: '8xf0y6ziyjabvozdd253nd',
-    author: 'amandeepsingh',
+    author: 't',
     timestamp: 1467166872634,
     optionOne: {
-      votes: ['amandeepsingh'],
+      votes: ['t'],
       text: 'Build our new application with Javascript',
     },
     optionTwo: {
@@ -20,24 +20,24 @@ const initialState = {
     author: 'mtsamis',
     timestamp: 1468479767190,
     optionOne: {
-      votes: [],
+      votes: ['mtsamis', 't'],
       text: 'hire more frontend developers',
     },
     optionTwo: {
-      votes: ['mtsamis', 'amandeepsingh'],
+      votes: [],
       text: 'hire more backend developers'
     }
   },
   "am8ehyc8byjqgar0jgpub9": {
     id: 'am8ehyc8byjqgar0jgpub9',
-    author: 'amandeepsingh',
+    author: 't',
     timestamp: 1488579767190,
     optionOne: {
       votes: [],
       text: 'conduct a release retrospective 1 week after a release',
     },
     optionTwo: {
-      votes: ['amandeepsingh'],
+      votes: ['t'],
       text: 'conduct release retrospectives quarterly'
     }
   },
@@ -50,7 +50,7 @@ const initialState = {
       text: 'have code reviews conducted by peers',
     },
     optionTwo: {
-      votes: ['amandeepsingh'],
+      votes: ['t'],
       text: 'have code reviews conducted by managers'
     }
   },
@@ -88,11 +88,14 @@ export const questionsSlice = createSlice({
   reducers: {
     add: (state, action) => {
       state[`${action.payload.id}`] = action.payload;
+    },
+    addAns: (state, action) => {
+      state[action.payload.questionId][action.payload.selectedAns].votes.push(action.payload.userId);
     }
   }
 });
 
-export const { add } = questionsSlice.actions
+export const { add, addAns } = questionsSlice.actions
 
 export const selectQuestions = (state) => state.questions;
 

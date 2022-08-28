@@ -13,22 +13,26 @@ export default function Index() {
   const user = useSelector(selectUser);
 
   useEffect(() => {
-    if (!user) {
+    if (!user.id) {
       router.replace("/login");
     }
   }, [])
 
   return (
     <>
-      <Container sx={{ m: 2.5 }}>
-        <Box sx={{ w: 100 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Leaderboard
-          </Typography>
-        </Box>
-      </Container>
-      <Header activeIndex={1} user={user} />
-      <Leaderboard />
+      {
+        user?.id ?
+          (<><Container sx={{ m: 2.5 }}>
+            <Box sx={{ w: 100 }}>
+              <Typography variant="h4" component="h1" gutterBottom>
+                Leaderboard
+              </Typography>
+            </Box>
+          </Container>
+            <Header activeIndex={1} user={user} />
+            <Leaderboard /></>)
+          : <div>Loading...</div>
+      }
     </>
   );
 }

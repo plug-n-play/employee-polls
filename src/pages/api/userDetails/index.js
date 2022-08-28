@@ -12,8 +12,8 @@ const users = {
     },
     questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
   },
-  amandeepsingh: {
-    id: 'amandeepsingh',
+  t: {
+    id: 't',
     name: 'Amandeep Singh',
     avatarURL: '/images/1.png',
     answers: {

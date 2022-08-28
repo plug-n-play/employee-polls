@@ -1,21 +1,11 @@
-// mock dashboard apis
-const dashboard = {
-  t: {
-    id: 't',
-    name: 'Test User',
-    avatarURL: null,
-    answers: {
-      "8xf0y6ziyjabvozdd253nd": 'optionOne',
-      "6ni6ok3ym7mf1p33lnez": 'optionOne',
-      "am8ehyc8byjqgar0jgpub9": 'optionTwo',
-      "loxhs1bqm25b708cmbf3g": 'optionTwo'
-    },
-    questions: ['8xf0y6ziyjabvozdd253nd', 'am8ehyc8byjqgar0jgpub9']
-  },
+import { createSlice } from "@reduxjs/toolkit";
+
+// this information should come from an API when  it's available
+const initialState = {
   t: {
     id: 't',
     name: 'Amandeep Singh',
-    avatarURL: null,
+    avatarURL: '/images/1.png',
     answers: {
       "8xf0y6ziyjabvozdd253nd": 'optionOne',
       "6ni6ok3ym7mf1p33lnez": 'optionOne',
@@ -27,7 +17,7 @@ const dashboard = {
   tylermcginnis: {
     id: 'tylermcginnis',
     name: 'Tyler McGinnis',
-    avatarURL: null,
+    avatarURL: '/images/2.jpeg',
     answers: {
       "vthrdm985a262al8qx3do": 'optionOne',
       "xj352vofupe1dqz9emx13r": 'optionTwo',
@@ -37,7 +27,7 @@ const dashboard = {
   mtsamis: {
     id: 'mtsamis',
     name: 'Mike Tsamis',
-    avatarURL: null,
+    avatarURL: '/images/3.jpeg',
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
       "vthrdm985a262al8qx3do": 'optionTwo',
@@ -48,7 +38,7 @@ const dashboard = {
   zoshikanlu: {
     id: 'zoshikanlu',
     name: 'Zenobia Oshikanlu',
-    avatarURL: null,
+    avatarURL: '/images/4.jpeg',
     answers: {
       "xj352vofupe1dqz9emx13r": 'optionOne',
     },
@@ -56,6 +46,21 @@ const dashboard = {
   }
 }
 
-export default function handler(req, res) {
-  res.status(200).json(dashboard)
-}
+export const leaderboardSlice = createSlice({
+  name: "leaderboard",
+  initialState,
+  reducers: {
+    addAnswer: (state, action) => {
+      state[action.payload.userId].answers[action.payload.questionId] = action.payload.selectedAns;
+    },
+    addQuestionToLeaderboard: (state, action) => {
+      state[action.payload.userId].questions.push(action.payload.questionId);
+    }
+  }
+});
+
+export const { addAnswer, addQuestionToLeaderboard } = leaderboardSlice.actions
+
+export const selectLeaderboard = (state) => state.leaderboard;
+
+export default leaderboardSlice.reducer;

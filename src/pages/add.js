@@ -7,24 +7,24 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Header from '../components/Header';
 import FormControl from '@mui/material/FormControl';
-import { useAppSelector } from "@/app/hooks";
 import { selectUser } from '@/features/user/userSlice';
-import { add as addQuestion } from '@/features/questions/questionsSlice';
+import { add as addQuestionToState } from '@/features/questions/questionsSlice';
+import { addQuestionToLeaderboard } from '@/features/leaderboard/leaderboardSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 function generateUID() {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
 
-export default function NewPoll() {
-  const [option1, setOption1] = useState(null)
-  const [option2, setOption2] = useState(null)
+export default function AddPoll() {
+  const [option1, setOption1] = useState('')
+  const [option2, setOption2] = useState('')
   const router = useRouter();
   const user = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user) {
+    if (!user.id) {
       router.replace("/login");
     }
   }, [])
@@ -53,7 +53,11 @@ export default function NewPoll() {
       }
     }
 
-    dispatch(addQuestion(question));
+    dispatch(addQuestionToState(question));
+    dispatch(addQuestionToLeaderboard({
+      questionId: question.id,
+      userId: user.id,
+    }));
 
     router.push('/');
   }

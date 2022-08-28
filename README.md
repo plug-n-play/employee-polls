@@ -14,7 +14,13 @@ yarn dev
 ```
 
 ## Login Credentials
-Login credentials can be found at https://github.com/plug-n-play/employee-polls/blob/main/src/pages/api/auth/index.js#L3-L16
+Login credentials for existing users:
+| Username |   Password    |
+|----------|:-------------:|
+| tylermcginnis | abc321 |
+| mtsamis | xyz123 |
+| zoshikanlu | pass246 |
+| t |  t  |
 
 ## Functional flow
 Existing users can:
@@ -29,9 +35,9 @@ Ability to create new users has not yet been created.
 
 ## Mock Data
 Mock Data available from https://github.com/udacity/nd0191-c2-React-Redux-project-starter/blob/main/_DATA.js has been distributed in the application in following files:
-1. Users Data: https://github.com/plug-n-play/employee-polls/blob/main/src/pages/api/auth/index.js#L22-L77
-2. Questions: https://github.com/plug-n-play/employee-polls/blob/main/src/features/questions/questionsSlice.js#L4-L83
-3. generateUID: https://github.com/plug-n-play/employee-polls/blob/main/src/pages/newPoll.js#L15-L17
+1. Users Data: https://github.com/plug-n-play/employee-polls/blob/main/src/pages/api/auth/index.js
+2. Questions: https://github.com/plug-n-play/employee-polls/blob/main/src/features/questions/questionsSlice.js
+3. generateUID: https://github.com/plug-n-play/employee-polls/blob/main/src/pages/add.js
 
 
 ## Credits
