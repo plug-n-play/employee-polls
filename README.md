@@ -3,8 +3,18 @@
 ## About
 A sample project which lets Employees of an organisation create & manage Polls
 
+## Installation
+```
+yarn
+```
+
+## How to Start Dev Server?
+```
+yarn dev
+```
+
 ## Login Credentials
-Login credentials can be found at ___
+Login credentials can be found at https://github.com/plug-n-play/employee-polls/blob/main/src/pages/api/auth/index.js#L3-L16
 
 ## Functional flow
 Existing users can:
@@ -16,6 +26,13 @@ Existing users can:
 4. View Leaderboard which summarises all the polls asked and answered by other users.
 
 Ability to create new users has not yet been created.
+
+## Mock Data
+Mock Data available from https://github.com/udacity/nd0191-c2-React-Redux-project-starter/blob/main/_DATA.js has been distributed in the application in following files:
+1. Users Data: https://github.com/plug-n-play/employee-polls/blob/main/src/pages/api/auth/index.js#L22-L77
+2. Questions: https://github.com/plug-n-play/employee-polls/blob/main/src/features/questions/questionsSlice.js#L4-L83
+3. generateUID: https://github.com/plug-n-play/employee-polls/blob/main/src/pages/newPoll.js#L15-L17
+
 
 ## Credits
 This project has been bootstrated using the official [Material UI NextJS example](https://github.com/mui/material-ui/tree/master/examples/nextjs)
