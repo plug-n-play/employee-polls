@@ -21,7 +21,11 @@ export default function Question({ questionId }) {
   const router = useRouter();
   const user = useSelector(selectUser);
   const questions = useAppSelector(selectQuestions);
-  const { optionOne, optionTwo } = questions[questionId];
+
+  const { optionOne, optionTwo } = questions[questionId] || {
+    optionOne: { votes: [] },
+    optionTwo: { votes: [] },
+  };
   let ans = '';
 
   if (optionOne.votes.indexOf(user?.id) > -1) {
@@ -31,8 +35,12 @@ export default function Question({ questionId }) {
   }
 
   useEffect(() => {
-    if (!user.id) {
+    if (!questions[questionId]) {
+      router.replace(`/login?initiator=404`);
+      return;
+    } else if (!user.id) {
       router.replace(`/login?initiator=questions/${questionId}`);
+      return;
     }
 
     fetch(`/api/userDetails?author=${questions[questionId]?.author}`)
