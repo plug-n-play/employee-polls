@@ -20,15 +20,19 @@ export default function Index() {
 
   return (
     <>
-      {user && user.id && (<><Container sx={{ m: 2.5 }}>
-        <Box sx={{ w: 100 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Dashboard
-          </Typography>
-        </Box>
-      </Container>
-        <Header activeIndex={0} user={user} />
-        <Dashboard user={user} /></>)}
+      {user && user.id && (
+        <>
+          <Container sx={{ m: 2.5 }}>
+            <Box sx={{ w: 100 }}>
+              <Typography variant="h4" component="h1" gutterBottom>
+                Dashboard
+              </Typography>
+            </Box>
+          </Container>
+          <Header activeIndex={0} user={user} />
+          <Dashboard user={user} />
+        </>
+      )}
     </>
   );
 }

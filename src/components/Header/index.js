@@ -126,17 +126,18 @@ const ResponsiveAppBar = ({ activeIndex, user }) => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Box component="span" sx={{ fontWeight: 600, mr: 2, display: { xs: 'none', md: 'inline-block' } }}>
+            {user && (<><Box component="span" sx={{ fontWeight: 600, mr: 2, display: { xs: 'none', md: 'inline-block' } }}>
               {user?.name}
             </Box>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt={user?.name || 'user image'} src={user?.avatarURL} />
-              </IconButton>
-            </Tooltip>
-            <Box component="span" sx={{ display: { xs: 'none', md: 'inline-block' } }}>
-              <span className='headerLink logout' onClick={onLogout}>Logout</span>
-            </Box>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt={user?.name || 'user image'} src={user?.avatarURL} />
+                </IconButton>
+              </Tooltip>
+              <Box component="span" sx={{ display: { xs: 'none', md: 'inline-block' } }}>
+                <span className='headerLink logout' onClick={onLogout}>Logout</span>
+              </Box></>)}
+
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"

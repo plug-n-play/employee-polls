@@ -13,8 +13,8 @@ export default function Index() {
   const user = useSelector(selectUser);
 
   useEffect(() => {
-    if (!user.id) {
-      router.replace("/login");
+    if (!user?.id) {
+      router.replace("/login?initiator=leaderboard");
     }
   }, [])
 

@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 
-export default function PollCard({ id, author, ans, time }) {
+export default function PollCard({ id, author, time }) {
   const date = new Date(time);
   return (
     <Box component="span" sx={{ width: 275, display: 'inline-block', m: 1 }}>
@@ -19,7 +19,7 @@ export default function PollCard({ id, author, ans, time }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Link href={ans ? `/questions?id=${id}&ans=${ans}` : `/questions?id=${id}`}>
+          <Link href={`/questions/${id}`}>
             <a>Show</a>
           </Link>
         </CardActions>

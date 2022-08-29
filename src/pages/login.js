@@ -1,24 +1,26 @@
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router'
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import { createTheme } from '@mui/material/styles';
+import Header from '@/components/Header';
 import { selectUser, setUser } from '@/features/user/userSlice'
 import { useDispatch, useSelector } from 'react-redux';
 
-const theme = createTheme();
+// const theme = createTheme();
 
 export default function SignIn() {
   const inputRef = useRef();
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
+  const { initiator } = router.query;
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function SignIn() {
         if (user) {
           // set user to store
           dispatch(setUser(user));
-          router.push('/');
+          router.push(initiator ? initiator : '/');
         } else {
           setLoginError(error)
         }
@@ -56,7 +58,15 @@ export default function SignIn() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      <Container sx={{ m: 2.5 }}>
+        <Box sx={{ w: 100 }}>
+          <Typography variant="h4" component="h1" gutterBottom>
+            Login
+          </Typography>
+        </Box>
+      </Container>
+      <Header />
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -67,12 +77,12 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          {/* <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
-          </Typography>
+          </Typography> */}
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
@@ -110,6 +120,6 @@ export default function SignIn() {
           color: #ff0000;
         }
       `}</style>
-    </ThemeProvider>
+    </>
   );
 }

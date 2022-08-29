@@ -19,14 +19,6 @@ export default function Dashboard({ user }) {
   return (
     <>
       <Container sx={{ m: 2.5 }}>
-        <Box sx={{ w: 100 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            Dashboard
-          </Typography>
-        </Box>
-      </Container>
-
-      <Container sx={{ m: 2.5 }}>
         <Box sx={{ mt: 5 }}>
           <Typography variant="h5" component="h2" gutterBottom>
             New Questions
@@ -47,7 +39,7 @@ export default function Dashboard({ user }) {
           {answeredQs.length ? (answeredQs.sort(function (a, b) {
             return new Date(b.timestamp) - new Date(a.timestamp);
           }).map(({ id }) => (
-            <PollCard key={id} id={id} author={questions[id].author} time={questions[id].timestamp} ans={user.answers[`${id}`]} />
+            <PollCard key={id} id={id} author={questions[id].author} time={questions[id].timestamp} />
           )))
             : <Typography variant="p" component="p" gutterBottom>
               None

@@ -24,8 +24,8 @@ export default function AddPoll() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user.id) {
-      router.replace("/login");
+    if (!user?.id) {
+      router.replace("/login?initiator=add");
     }
   }, [])
 
