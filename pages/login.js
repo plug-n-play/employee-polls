@@ -20,7 +20,7 @@ export default function SignIn() {
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
-  const { initiator } = router.query;
+  const { initiator } = router?.query || { initiator: '' };
   const user = useSelector(selectUser);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
 
     // call login api
-    fetch("/api/auth", {
+    window.fetch && window.fetch("/api/auth", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -91,6 +91,7 @@ export default function SignIn() {
               id="username"
               label="Username"
               name="username"
+              data-testid="username"
               inputRef={inputRef}
             />
             <TextField
@@ -100,12 +101,14 @@ export default function SignIn() {
               name="password"
               label="Password"
               type="password"
+              data-testid="password"
               id="password"
               autoComplete="current-password"
             />
             {loginError && <div className='error'>{loginError}</div>}
             <Button
               type="submit"
+              data-testid="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
